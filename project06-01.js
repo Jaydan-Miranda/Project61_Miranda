@@ -17,13 +17,18 @@ window.addEventListener("load", function() {
    
       // Set up an event handler for the Confirm Password field
       pwd2.oninput = function() {
-         // Check if the passwords do not match
-         if (pwd2.value !== pwd.value) {
-            // If they don't match, set a custom validity message
-            pwd2.setCustomValidity("Passwords must match");
-         } else {
-            // If they match, clear the custom validity message
+         // If the password does have a number or letter and is at least 8 characters long
+         if (pwd.value.length < 8 || !/\d/.test(pwd.value) || !/[a-zA-Z]/.test(pwd.value)) {
+            pwd2.setCustomValidity("Your password must be at least 8 characters with at least one letter and one number");
+         }
+         // Else if the passwords do not match
+         else if (pwd.value !== pwd2.value) {
+            pwd2.setCustomValidity("Your passwords must match");
+         }
+         // c. Otherwise, set the validation message to an empty text string
+         else {
             pwd2.setCustomValidity("");
          }
       };
    });
+   
